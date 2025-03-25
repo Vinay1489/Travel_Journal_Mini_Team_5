@@ -19,7 +19,6 @@ export default function App() {
       <ProfilePage />
       <SettingsPage />
       <LoginPage />
-      <SignupPage />
     </div>
   );
 }
