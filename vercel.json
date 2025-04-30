@@ -2,11 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "Frontend/Travel-Journal/package.json",
+      "src": "Frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "Frontend/Travel-Journal/dist",
-        "buildCommand": "npm run build --prefix Frontend/Travel-Journal"
+        "buildCommand": "npm run build --prefix Frontend",
+        "distDir": "Frontend/dist"
       }
     },
     {
@@ -21,7 +21,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/Frontend/Travel-Journal/dist/$1"
+      "dest": "/Frontend/dist/$1"
     }
   ]
 }
