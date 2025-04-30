@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const Header = ({ title, onBackClick, actionButtonText, onActionClick }) => {
+const Header = ({ title, onBackClick}) => {
   return (
     <header className="flex justify-center w-full border-b border-solid backdrop-blur bg-gray-50 bg-opacity-80 border-b-slate-200 border-b-opacity-40 h-[65px]">
       <div className="flex relative items-center px-4 py-0 w-full h-16 max-w-[1400px]">
@@ -20,12 +20,6 @@ const Header = ({ title, onBackClick, actionButtonText, onActionClick }) => {
         <h1 className="ml-4 text-xl font-medium text-slate-700 max-sm:text-lg">
           {title}
         </h1>
-        <button
-          onClick={onActionClick}
-          className="absolute right-4 px-4 py-3 text-sm font-medium bg-blue-600 rounded-2xl cursor-pointer text-slate-50 max-sm:px-3 max-sm:py-2 max-sm:text-xs"
-        >
-          {actionButtonText}
-        </button>
       </div>
     </header>
   );

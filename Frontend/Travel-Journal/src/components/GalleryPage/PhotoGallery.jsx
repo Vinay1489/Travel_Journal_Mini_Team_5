@@ -17,7 +17,6 @@ function PhotoGallery() {
         <GalleryControls />
         <PhotoGrid />
       </main>
-      <BottomNav />
     </>
   );
 }

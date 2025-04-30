@@ -2,14 +2,31 @@ import React from "react";
 import Tag from "./Tag";
 import JourneyActions from "./JourneyActions";
 
-function JourneyContent() {
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+
+function JourneyContent({ journal }) {
+  if (!journal) return null;
+
+  const feelingEmojis = {
+    happy: "😊",
+    excited: "🎉",
+    nostalgic: "💭",
+    peaceful: "😌",
+    adventurous: "🌍",
+    amazed: "😲",
+    tired: "😴",
+    reflective: "🧠",
+  };
+
   return (
     <article className="mb-12">
       <div className="relative mb-8">
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/973ef56286d0ad2ab57233e00a42fce096dd03e2"
+          // src={journal.photos}
+          src={journal.photos ? `${baseURL}${journal.photos}` : "/fallback.jpg"}
           className="object-cover w-full rounded-2xl h-[504px]"
-          alt="Mont Saint-Michel"
+          alt={journal.title}
         />
         <button className="absolute right-4 bottom-4 gap-1 px-2.5 py-1.5 text-xs font-semibold rounded-full bg-slate-100 text-slate-700">
           Save
@@ -17,7 +34,7 @@ function JourneyContent() {
       </div>
 
       <h2 className="mb-4 text-4xl text-slate-700 max-md:text-3xl">
-        Sunrise at Mont Saint-Michel
+        {journal.title}
       </h2>
 
       <div className="flex gap-4 items-center mb-5 max-sm:flex-wrap">
@@ -59,7 +76,7 @@ function JourneyContent() {
               strokeLinejoin="round"
             />
           </svg>
-          <span>June 12, 2023</span>
+          <span>{new Date(journal.createdAt).toLocaleDateString()}</span>
         </div>
 
         <div className="flex gap-1.5 items-center text-sm text-slate-600">
@@ -86,23 +103,72 @@ function JourneyContent() {
               strokeLinejoin="round"
             />
           </svg>
-          <span>Mont Saint-Michel, France</span>
+          <span>{journal.location.name}</span>
         </div>
 
-        <Tag text="😌 peaceful" color="blue" />
+        {journal.feelings?.map((feeling) => (
+          <Tag
+            key={feeling}
+            text={`${feelingEmojis[feeling] || ""} ${feeling}`}
+            color="blue"
+          />
+        ))}
       </div>
 
       <p className="mb-9 text-base leading-7 text-slate-700 text-opacity-90">
-        Waking up before dawn was worth it to see the golden light illuminate
-        the abbey. The silhouette against the morning sky is something I'll
-        never forget. The tide was low, revealing the vast sandbanks that
-        surround the island. Walking around the ancient walls and narrow streets
-        before the crowds arrived felt like stepping back in time.
+     {journal.story}
       </p>
 
-      <JourneyActions />
+      <JourneyActions journal={journal} />
     </article>
   );
 }
 
 export default JourneyContent;
+
+// import React from "react";
+// import Tag from "./Tag";
+// import JourneyActions from "./JourneyActions";
+
+// function JourneyContent({ journal }) {
+//   if (!journal) return null;
+
+//   return (
+//     <article className="mb-12">
+//       <div className="relative mb-8">
+//         <img
+//           src={journal.photos || "https://via.placeholder.com/600"}
+//           className="object-cover w-full rounded-2xl h-[504px]"
+//           alt={journal.title}
+//         />
+//         <button className="absolute right-4 bottom-4 gap-1 px-2.5 py-1.5 text-xs font-semibold rounded-full bg-slate-100 text-slate-700">
+//           Save
+//         </button>
+//       </div>
+
+//       <h2 className="mb-4 text-4xl text-slate-700 max-md:text-3xl">
+//         {journal.title}
+//       </h2>
+
+//       <div className="flex gap-4 items-center mb-5 max-sm:flex-wrap">
+//         <div className="flex gap-1.5 items-center text-sm text-slate-600">
+//           <span>{new Date(journal.createdAt).toLocaleDateString()}</span>
+//         </div>
+
+//         <div className="flex gap-1.5 items-center text-sm text-slate-600">
+//           <span>{journal.location?.name || "Unknown location"}</span>
+//         </div>
+
+//         <Tag text={journal.feelings} color="blue" />
+//       </div>
+
+//       <p className="mb-9 text-base leading-7 text-slate-700 text-opacity-90">
+//         {journal.story}
+//       </p>
+
+//       <JourneyActions />
+//     </article>
+//   );
+// }
+
+// export default JourneyContent;

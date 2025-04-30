@@ -3,7 +3,7 @@ import React from "react";
 function FilterControls() {
   return (
     <div className="flex gap-2">
-      <button className="flex gap-2 items-center px-3 py-2.5 bg-gray-50 rounded-2xl border border-slate-200">
+      {/* <button className="flex gap-2 items-center px-3 py-2.5 bg-gray-50 rounded-2xl border border-slate-200">
         <svg
           width="17"
           height="16"
@@ -75,7 +75,7 @@ function FilterControls() {
           />
         </svg>
         <span className="text-sm text-slate-700">List</span>
-      </button>
+      </button> */}
       <button className="flex gap-2 items-center px-3 py-2.5 bg-blue-600 rounded-2xl">
         <svg
           width="17"

@@ -1,6 +1,6 @@
-module.exports=(req,res)=>{
+module.exports = (req, res) => {
   res.status(200).json({
-    message:"This is Entry Router",
-    status:'success'
-  })
-}
+    message: "This is Entry Router",
+    status: "success",
+  });
+};

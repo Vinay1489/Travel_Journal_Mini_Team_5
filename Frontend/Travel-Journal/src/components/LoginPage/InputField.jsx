@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 const InputField = ({
   label,
@@ -18,9 +19,7 @@ const InputField = ({
           {label}
         </label>
         {forgotPasswordLink && (
-          <a href="#" className="text-xs text-blue-600 no-underline">
-            {forgotPasswordLink}
-          </a>
+           <Link to="/forgot" className="text-xs text-blue-600 no-underline"> {forgotPasswordLink}</Link>
         )}
       </div>
       <div className="relative h-10 bg-gray-50 rounded-2xl border border-solid border-slate-200">

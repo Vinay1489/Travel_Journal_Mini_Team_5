@@ -1,6 +1,6 @@
 import React from "react";
 
-function InputField({ label, type, placeholder, icon, helperText }) {
+function InputField({ label, type, placeholder, icon, helperText, value, onChange }) {
   return (
     <>
       <label className="mb-2 text-sm text-slate-700">{label}</label>
@@ -11,6 +11,8 @@ function InputField({ label, type, placeholder, icon, helperText }) {
           placeholder={placeholder}
           className="py-0 pr-3 pl-10 text-sm border-none outline-none bg-transparent w-full h-full text-slate-600"
           aria-label={label}
+          value={value}           
+          onChange={onChange}  
         />
       </div>
       {helperText && (

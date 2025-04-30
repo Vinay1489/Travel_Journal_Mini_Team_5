@@ -12,13 +12,13 @@ const DB = process.env.DATABASE.replace(
 
 mongoose
   .connect(DB, {
-    tlsAllowInvalidCertificates: true
+    tlsAllowInvalidCertificates: true,
   })
   .then(() => {
     console.log("DB connection is successful");
-  }).catch((err)=>
-  {
-  console.log("Error in connecting "+err);
+  })
+  .catch((err) => {
+    console.log("Error in connecting " + err);
   });
 
 app.get("/", (req, res) => {

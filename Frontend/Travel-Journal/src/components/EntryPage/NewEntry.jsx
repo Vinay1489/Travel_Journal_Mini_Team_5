@@ -2,13 +2,14 @@
 import * as React from "react";
 import NewEntryHeader from "./NewEntryHeader";
 import NewEntryForm from "./NewEntryForm";
-import BottomNavigation from "./BottomNavigation";
+import BottomNavigation from "../BottomNavigation";
 
 function NewEntry() {
   return (
-    <div className="flex flex-col font-medium bg-white">
-      <NewEntryHeader />
-      <NewEntryForm />
+    <div>
+      <section className="flex flex-col font-medium bg-white pb-20">
+        <NewEntryForm />
+      </section>
       <BottomNavigation />
     </div>
   );

@@ -1,16 +1,21 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Header from "./Header";
 import SettingsSection from "./SettingsSection";
 import ProfileSection from "./ProfileSection";
 import ToggleSwitch from "./ToggleSwitch";
 import Footer from "./Footer";
+import BottomNavigation from "../BottomNavigation";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../api/authService";
+import { UserContext } from "../../context/UserContext"; // Import the context
 
 function SettingsPage() {
+  const navigate = useNavigate();
+  const {setIsLoggedIn } = useContext(UserContext); // Access context
+
   return (
     <main className="flex flex-col bg-gray-50 min-h-screen">
-      <Header />
-
       <section className="flex flex-col px-96 py-16 max-md:px-8 max-sm:px-4">
         <h1 className="mb-1 text-xl font-medium leading-7 text-slate-700">
           Account Settings
@@ -78,7 +83,15 @@ function SettingsPage() {
           </div>
         </SettingsSection>
 
-        <button className="flex gap-2 justify-center items-center px-0 py-2.5 w-full bg-red-500 rounded-2xl">
+        <button
+          onClick={async (e) => {
+            e.preventDefault();
+            await logout();
+            setIsLoggedIn(false);
+            navigate("/");
+          }}
+          className="flex gap-2 justify-center items-center px-0 py-2.5 w-full bg-red-500 rounded-2xl"
+        >
           <svg
             width="17"
             height="16"
@@ -109,13 +122,14 @@ function SettingsPage() {
               strokeLinejoin="round"
             ></path>
           </svg>
+
           <span className="text-sm font-medium leading-5 text-slate-50">
             Log Out
           </span>
         </button>
       </section>
 
-      <Footer />
+      <BottomNavigation />
     </main>
   );
 }

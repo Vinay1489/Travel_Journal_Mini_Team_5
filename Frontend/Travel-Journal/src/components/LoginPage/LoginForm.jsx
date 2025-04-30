@@ -1,16 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import InputField from "./InputField";
+import { Link, useNavigate } from "react-router-dom";
+import { login  } from "../../api/authService";
+import { UserContext } from "../../context/UserContext";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
+  const {isLoggedIn,setIsLoggedIn}=useContext(UserContext);
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("••••••••");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login attempt with:", { email, password });
+    try {
+      const data = await login(email, password);
+      if (data.status === "Success") {
+        console.log("Hello from server");
+        setIsLoggedIn((login) => !login);
+        // alert("Logged in Successfully");
+        toast.success("🎉 Logged in successfully!");
+        navigate("/",{replace:true});
+      }
+    } catch (err) {
+      // alert(err.response.data.message || "Login failed");
+      toast.error(`🚫 ${err.response?.data?.message || "Login failed"}`);
+    }
   };
 
   const emailIcon = (
@@ -54,7 +71,7 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           icon={passwordIcon}
-          forgotPasswordLink="Forgot password?"
+          forgotPasswordLink="forgot password"
         />
 
         <button
@@ -67,9 +84,7 @@ const LoginForm = () => {
 
       <div className="mt-6 text-sm text-slate-600">
         <span>Don't have an account? </span>
-        <a href="#" className="text-blue-600 no-underline">
-          Sign up
-        </a>
+        <Link to="/signup" className="text-blue-600 no-underline">Sign up</Link>
       </div>
     </section>
   );
