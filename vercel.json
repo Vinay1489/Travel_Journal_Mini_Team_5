@@ -2,9 +2,9 @@
   "version": 2,
   "builds": [
     {
-      "src": "Frontend/package.json",
+      "src": "Frontend/Travel-Journal/package.json",
       "use": "@vercel/static-build",
-      "config": { "includeFiles": ["Frontend/**"] }
+      "config": { "includeFiles": ["Frontend/Travel-Journal/**"] }
     },
     {
       "src": "Backend/server.js",
@@ -15,7 +15,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/Frontend/$1"
+      "dest": "/Frontend/Travel-Journal/$1"
     },
     {
       "src": "/api/(.*)",
