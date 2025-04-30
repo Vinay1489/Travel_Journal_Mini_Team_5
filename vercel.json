@@ -4,22 +4,24 @@
     {
       "src": "Frontend/Travel-Journal/package.json",
       "use": "@vercel/static-build",
-      "config": { "includeFiles": ["Frontend/Travel-Journal/**"] }
+      "config": {
+        "distDir": "Frontend/Travel-Journal/dist",
+        "buildCommand": "npm run build --prefix Frontend/Travel-Journal"
+      }
     },
     {
       "src": "Backend/server.js",
-      "use": "@vercel/node",
-      "config": { "includeFiles": ["Backend/**"] }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/Frontend/Travel-Journal/$1"
+      "src": "/api/(.*)",
+      "dest": "/Backend/server.js"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/Backend/$1"
+      "src": "/(.*)",
+      "dest": "/Frontend/Travel-Journal/dist/$1"
     }
   ]
 }
