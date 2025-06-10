@@ -1,6 +1,6 @@
 
 export default function JourneyTabs({ activeTab, setActiveTab }) {
-  const tabs = ["Details", "Map", "Media"];
+  const tabs = ["Details", "Map", "Media","Reviews"];
 
   return (
     <nav className="mb-8 rounded-2xl bg-slate-100">

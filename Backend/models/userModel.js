@@ -35,16 +35,38 @@ const userSchema = new mongoose.Schema(
       minlength: 8,
       select: false,
     },
+    // passwordConfirm: {
+    //   type: String,
+    //   required: [true, "Please confirm your password"],
+    //   validate: {
+    //     validator: function (el) {
+    //       return el === this.password;
+    //     },
+    //     message: "Passwords are not same!",
+    //   },
+    // },
+
     passwordConfirm: {
-      type: String,
-      required: [true, "Please confirm your password"],
-      validate: {
-        validator: function (el) {
-          return el === this.password;
-        },
-        message: "Passwords are not same!",
-      },
+  type: String,
+  required: function() {
+    return this.isModified('password');  // Required only if password is new or changed
+  },
+  validate: {
+    validator: function(el) {
+      return el === this.password;  // Check passwords match
     },
+    message: 'Passwords are not same!'
+  }
+    },
+
+    isVerified: {
+  type: Boolean,
+  default: false
+},
+otp: String,
+otpExpires: Date,
+emailVerificationToken: String,
+emailVerificationExpires: Date,
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
@@ -119,6 +141,19 @@ userSchema.methods.createPasswordResetToken = function () {
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
   return resetToken;
 };
+
+
+userSchema.methods.createEmailVerificationToken = function () {
+  const token = crypto.randomBytes(32).toString("hex");
+  this.emailVerificationToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+  this.emailVerificationExpires = Date.now() + 10 * 60 * 1000; // 10 mins
+  return token;
+};
+
+
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

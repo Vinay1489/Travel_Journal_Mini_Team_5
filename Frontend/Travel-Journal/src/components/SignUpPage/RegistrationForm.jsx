@@ -19,18 +19,24 @@ function RegistrationForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+const [responseMessage, setResponseMessage] = useState("");
+
 
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = await signup(name, email, password, passwordConfirm);
-      if (data.status === "Success") {
+      if (data.status === "success") {
         // alert("Account created Successfully!");
-        toast.success("✅ Signed up successfully! ");
-        console.log("Sending: ", name, email, password, passwordConfirm);
-        setIsLoggedIn(!isLoggedIn);
-        navigate("/");
+        setResponseMessage(data.message);
+        setSubmitted(true);
+        toast.success("✅ "+data.message);
+        // toast.success("✅ Signed up successfully! ");
+        // console.log("Sending: ", name, email, password, passwordConfirm);
+        // setIsLoggedIn(!isLoggedIn);
+        // navigate("/");
       }
     } catch (err) {
       const rawMessage = err.response?.data?.message || "Signup failed";
@@ -44,6 +50,8 @@ function RegistrationForm() {
   };
 
   return (
+    <>
+    {!submitted?(
     <form onSubmit={handleSubmit} className="mx-auto my-0 w-96 max-sm:w-full">
       <div className="mb-5">
         <InputField
@@ -103,7 +111,18 @@ function RegistrationForm() {
           Sign in
         </Link>
       </div>
-    </form>
+    </form>):(
+     <div className="text-center mt-10 px-4">
+        <h2 className="text-xl font-semibold text-green-600 mb-2">
+          🎉 {responseMessage}
+        </h2>
+        <p className="text-gray-700">
+          Please check your email to verify your account before logging in.
+        </p>
+      </div>
+    )
+}
+</>
   );
 }
 

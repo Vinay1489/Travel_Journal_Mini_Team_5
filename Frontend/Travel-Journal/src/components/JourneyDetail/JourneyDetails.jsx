@@ -10,6 +10,7 @@ import MapView from "./MapView"; // 👈 import your MapView component
 import { getJourneyDetail } from "../../api/journeyDetail";
 import { getAllJourneys } from "../../api/journeyDetail";
 import GalleryTab from "./GalleryTab";
+import ReviewTab from "./ReviewTab";
 
 function JourneyDetails() {
   const { id } = useParams();
@@ -46,6 +47,7 @@ function JourneyDetails() {
         {activeTab === "Details" && <JourneyContent journal={journal} />}
         {activeTab === "Map" && <MapView journal={journal} />}
         {activeTab === "Media" && <GalleryTab journalId={journal._id} />}
+        {activeTab === "Reviews" && <ReviewTab journalId={journal._id} />}
         <hr className="mx-0 my-12 h-px bg-slate-200" />
         <JourneyCallToAction />
       </main>

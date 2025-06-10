@@ -5,6 +5,21 @@ const API = axios.create({
   withCredentials: true,
 });
 
+
+// Send OTP to email
+export const loginWithOtpSend = async (email,password) => {
+  const res = await API.post("/login", { email,password });
+  return res.data;
+};
+
+// Verify OTP
+export const loginWithOtpVerify = async (email, otp) => {
+  const res = await API.post("/verify-otp", { email, otp });
+  return res.data;
+};
+
+
+
 export const login = async (email, password) => {
   const res = await API.post("/login", {
     email,

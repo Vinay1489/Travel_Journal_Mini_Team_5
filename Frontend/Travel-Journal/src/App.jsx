@@ -20,6 +20,7 @@ import NewLogin from "./components/NewLogin/LoginPage";
 import ForgotPasswordPage from "./components/LoginPage/ForgotPasswordPage";
 import Header from "./components/HomePage/Header";
 import ScrollToTop from "./components/scrollToTop";
+import VerifySuccess from "./components/SignUpPage/verifySuccess";
 import BottomNavigation from "./components/BottomNavigation";
 import UpdateProfilePage from "./components/AccountSettingsPage/UpdateProfilePage";
 import SearchResults from "./components/SearchResults";
@@ -77,6 +78,7 @@ function AppContent() {
           <Route path="/update-profile" element={<UpdateProfilePage/>}/>
           <Route path="*" element={<NewLogin />} />
           <Route path="/search" element={<SearchResults />} />
+          <Route path="/verify-success" element={<VerifySuccess />} />
         </Routes>
         <ToastContainer position="top-center" autoClose={3000} />
         <Toaster richColors position="top-right" />

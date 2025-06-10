@@ -12,6 +12,11 @@ router.get(
   userController.getUser
 );
 
+router.get('/verify-email/:token', authController.verifyEmail);
+
+router.post("/verify-otp", authController.verifyOtp);
+
+
 router.post("/signup", authController.signUp);
 
 router.post("/login", authController.login);

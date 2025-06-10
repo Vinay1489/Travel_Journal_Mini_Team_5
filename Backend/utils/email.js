@@ -17,6 +17,9 @@ module.exports = class Email {
           user: process.env.SENDGRID_USERNAME,
           pass: process.env.SENDGRID_PASSWORD,
         },
+        tls: {
+    rejectUnauthorized: false, // Add only if needed
+  },
       });
     }
 
@@ -55,4 +58,29 @@ module.exports = class Email {
       `Please use the following link to reset your password: ${this.url}`
     );
   }
+
+  async sendEmailVerification() {
+
+      const html = `
+    <h1>Hello ${this.firstName},</h1>
+    <p>Please verify your email to the Travel Joural app by clicking the link below:</p>
+    <a href="${this.url}" target="_blank" style="display:inline-block; padding:10px 20px; background:#4CAF50; color:#fff; text-decoration:none; border-radius:5px;">Verify Email</a>
+    <p>If you did not request this, please ignore this email.</p>
+  `;
+
+
+  await this.send(
+    "Verify Your Email",
+    html
+  );
+}
+
+async sendOtp() {
+  await this.send(
+    "Your Login OTP for Travel Journal",
+    `Your OTP is <strong>${this.url}</strong>. It is valid for 10 minutes.`
+  );
+}
+
+
 };
