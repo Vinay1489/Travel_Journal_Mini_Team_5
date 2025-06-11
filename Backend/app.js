@@ -53,6 +53,14 @@ app.use("/api/v1/media",mediaRouter);
 app.use("/api/v1/comments",commentRouter);
 app.use("/api/v1/likes",likesRouter);
 
+
+app.get("/", (req, res) => {
+  res
+    .status(200)
+    .json({ message: "Hello from the server side!", app: "Travel-Journal" });
+});
+
+
 app.all(`*`, (req, res, next) => {
   // const err=new Error(`Can't find the ${req.originalUrl} in the server!`);
   // err.status="fail";
