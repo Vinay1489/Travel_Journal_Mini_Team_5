@@ -19,7 +19,7 @@ import SignupPage from "./components/SignUpPage/CreateAccountPage";
 import NewLogin from "./components/NewLogin/LoginPage";
 import ForgotPasswordPage from "./components/LoginPage/ForgotPasswordPage";
 import Header from "./components/HomePage/Header";
-import ScrollToTop from "./components/scrollToTop";
+import ScrollToTop from "./components/ScrollToTop";
 import VerifySuccess from "./components/SignUpPage/verifySuccess";
 import BottomNavigation from "./components/BottomNavigation";
 import UpdateProfilePage from "./components/AccountSettingsPage/UpdateProfilePage";
