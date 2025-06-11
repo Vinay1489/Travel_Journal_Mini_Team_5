@@ -16,7 +16,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/users/me", {
+        const res = await axios.get("https://travel-journal-w8vd.onrender.com/api/v1/users/me", {
           withCredentials: true,
         });
         if (res.data.status === "Success") {
