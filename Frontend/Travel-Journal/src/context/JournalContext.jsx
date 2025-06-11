@@ -8,7 +8,7 @@ export const JournalProvider = ({ children }) => {
 
   const fetchJournals = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/v1/journals", {
+      const res = await axios.get("https://travel-journal-w8vd.onrender.com/api/v1/journals", {
         withCredentials: true,
       });
       setJournals(res.data.data); // Make sure this matches your actual API response
