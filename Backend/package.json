@@ -4,6 +4,7 @@
   "description": "A Travel Journal Application",
   "main": "app.js",
   "scripts": {
+    "start": "cross-env NODE_ENV=production node server.js",
     "start:dev": "nodemon server.js",
     "start:prod": "cross-env NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js",
