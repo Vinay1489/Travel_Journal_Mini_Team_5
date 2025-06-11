@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000/api/v1/users",
+  baseURL: "https://travel-journal-w8vd.onrender.com/api/v1/users",
   withCredentials: true,
 });
 
