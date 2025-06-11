@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const JOURNEY_API = axios.create({
-  baseURL: "http://localhost:3000/api/v1/journals",
+  baseURL: "https://travel-journal-w8vd.onrender.com/api/v1/journals",
   withCredentials: true,
 });
 
