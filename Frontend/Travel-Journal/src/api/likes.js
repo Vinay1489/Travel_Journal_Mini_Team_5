@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const LIKE_API = axios.create({
-  baseURL: "http://localhost:3000/api/v1/likes",
+  baseURL: "https://travel-journal-w8vd.onrender.com/api/v1/likes",
   withCredentials: true,
 });
 
@@ -27,7 +27,7 @@ export const getJournalLikes = async (journalId) => {
 
 
 export const getLikedJournals = async () => {
-  const res = await axios.get("http://localhost:3000/api/v1/users/mylikes", {
+  const res = await axios.get("https://travel-journal-w8vd.onrender.com/api/v1/users/mylikes", {
     withCredentials: true,
   });
   return res.data.data.journals;
