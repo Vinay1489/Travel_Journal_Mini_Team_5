@@ -16,7 +16,7 @@ function PhotoGrid({ photos ,setPhotos}) {
     <section className="box-border grid gap-4 p-0 m-0 grid-cols-[repeat(3,1fr)] max-md:grid-cols-[repeat(2,1fr)] max-sm:grid-cols-[1fr]">
       {photos && photos.length > 0 ? (
         photos.map((photo) => (
-          <PhotoCard key={photo._id} title={photo.title} imageUrl={`http://localhost:3000${photo.url}`} journalId={photo.journalId}
+          <PhotoCard key={photo._id} title={photo.title} imageUrl={`https://travel-journal-w8vd.onrender.com${photo.url}`} journalId={photo.journalId}
           mediaId={photo._id}
           onDelete={handleDelete} />
         ))
