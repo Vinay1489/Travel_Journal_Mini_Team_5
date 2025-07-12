@@ -26,15 +26,15 @@ function HeroSection() {
     <section className="relative rounded-2xl h-[521px] overflow-hidden">
       {/* Image Stack with opacity transition */}
       {images.map((img, index) => (
-        <img
-          key={img}
-          src={img}
-          alt={`Hero Slide ${index}`}
-          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-            index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
-        />
-      ))}
+  <img
+    key={`${img}-${index}`} 
+    src={img}
+    alt={`Hero Slide ${index}`}
+    className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+      index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+    }`}
+  />
+))}
 
       <div className="absolute inset-0 bg-black bg-opacity-20 z-20" />
       <div className="absolute bottom-8 left-8 text-white max-sm:p-4 z-30">
