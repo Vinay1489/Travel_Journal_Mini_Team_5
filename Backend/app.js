@@ -13,6 +13,8 @@ const allowedOrigins = [
   'https://travel-journal-frontend.onrender.com',
 ];
 
+app.use(cookieParser());
+
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -51,8 +53,7 @@ const commentRouter=require("./routes/commentRoutes");
 const likesRouter=require("./routes/likeRoutes");
 
 
-app.use(express.json());
-app.use(cookieParser());
+
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/tours", tourRouter);
