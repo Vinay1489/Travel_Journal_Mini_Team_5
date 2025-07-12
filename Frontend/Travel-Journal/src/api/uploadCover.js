@@ -9,6 +9,7 @@ export const uploadCover = async (file, token) => {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     },
+     withCredentials: true,
   });
 
   return res.data.file;
