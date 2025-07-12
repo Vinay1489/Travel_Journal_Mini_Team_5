@@ -73,6 +73,10 @@ app.get("/", (req, res) => {
     .json({ message: "Hello from the server side!", app: "Travel-Journal" });
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 
 app.all(`*`, (req, res, next) => {
   // const err=new Error(`Can't find the ${req.originalUrl} in the server!`);
