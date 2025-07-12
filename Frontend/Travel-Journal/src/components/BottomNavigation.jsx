@@ -119,6 +119,7 @@ function BottomNavigation() {
                   await logout();
                   close();
                   setIsLoggedIn(false);
+                  setUser(null);
                   navigate("/");
                 }}
                 className="flex items-center gap-2 px-3 py-2 text-red-600 hover:bg-red-100 rounded"
