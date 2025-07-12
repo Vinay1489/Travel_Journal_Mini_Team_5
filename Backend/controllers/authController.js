@@ -25,7 +25,9 @@ const createSendToken = (user, statusCode, res) => {
   };
 
   if (process.env.NODE_ENV === "production") 
-  {cookieOptions.secure = true;
+  {
+    cookieOptions.domain = ".onrender.com"; 
+    cookieOptions.secure = true;
       cookieOptions.sameSite = "None";
   }
   res.cookie("jwt", token, cookieOptions);
