@@ -123,18 +123,23 @@ exports.uploadCover = upload.fields([{ name: "photos", maxCount: 1 }]);
 exports.resizeCover = catchAsync(async (req, res, next) => {
   if (!req.files || !req.files.photos) return next();
 
-  req.body.photos = `journal-${req.user.id}-${Date.now()}.jpeg`;
+  // Generate filename
+  const filename = `journal-${req.user.id}-${Date.now()}.jpeg`;
+
+  // Store in /uploads instead of /public
+  req.body.photos = `/uploads/${filename}`;
 
   await sharp(req.files.photos[0].buffer)
     .resize(1200, 800)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
-    .toFile(`public/img/journals/${req.body.photos}`);
+    .toFile(`uploads/${filename}`);
 
-    res.status(200).json({
-      status: "Success",
-      photoUrl: `/img/journals/${req.body.photos}`,
-    });
+  // Optionally return the photo path
+  res.status(200).json({
+    status: "Success",
+    photoUrl: req.body.photos,
+  });
 
   next();
 });
