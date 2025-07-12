@@ -265,10 +265,16 @@ exports.isLoggedIn = async (req, res, next) => {
 };
 
 exports.logout = (req, res, next) => {
-  res.cookie("jwt", "loggedOut", {
+   const cookieOptions = {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
-  });
+  };
+
+  if (process.env.NODE_ENV === "production") {
+    cookieOptions.secure = true;
+    cookieOptions.sameSite = "None";
+  }
+  res.cookie("jwt", "loggedOut",cookieOptions);
   // res.setHeader("Authorization", "");
   res.status(200).json({
     status: "Success",
