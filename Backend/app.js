@@ -5,8 +5,10 @@ const cors = require("cors");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 const path=require("path");
+const fs = require("fs");
 
 const app = express();
+app.set('trust proxy', 1);
 
 const allowedOrigins = [
   'http://localhost:5173',
@@ -24,14 +26,30 @@ app.use(
         callback(new Error('Not allowed by CORS'));
       }
     },
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+    credentials: true
   })
 );
+// Preflight for all routes
+app.options('*', cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Ensure upload directories exist at runtime
+const uploadsDir = path.join(__dirname, 'uploads');
+const userUploadsDir = path.join(uploadsDir, 'users');
+try {
+  fs.mkdirSync(userUploadsDir, { recursive: true });
+} catch (_) {}
+
+app.use('/uploads', express.static(uploadsDir));
 // Backward-compatible aliases: serve uploaded files also under legacy public paths
 app.use('/img/users', express.static(path.join(__dirname, 'uploads/users')));
 app.use('/img/journals', express.static(path.join(__dirname, 'uploads')));
