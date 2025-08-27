@@ -80,6 +80,10 @@ function BottomNavigation() {
             
             alt="Profile"
             className="w-7 h-7 rounded-full border-2 border-gray-300"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = AVATAR_FALLBACK_URL;
+            }}
           />
           <span className={activeTab === "Profile" ? "text-blue-600" : "text-slate-600"}>
             Profile

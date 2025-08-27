@@ -100,6 +100,10 @@ function MemoryCard({ title, id, date, location, description, mood, image, user 
               src={user.photo ? `${API_BASE_URL}/uploads/users/${user.photo}` : AVATAR_FALLBACK_URL}
               alt={user.name}
               className="w-8 h-8 rounded-full object-cover"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = AVATAR_FALLBACK_URL;
+              }}
             />
             <span className="text-sm text-slate-600 font-medium">{user.name}</span>
           </div>

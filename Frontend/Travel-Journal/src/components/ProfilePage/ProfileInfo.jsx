@@ -43,6 +43,10 @@ function ProfileInfo() {
             }
             alt="Profile"
             className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = AVATAR_FALLBACK_URL;
+            }}
           />
         </div>
 

@@ -10,7 +10,7 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const defaultPic = `${API_BASE_URL}/uploads/users/default.jpg` || AVATAR_FALLBACK_URL;
+  const defaultPic = AVATAR_FALLBACK_URL;
 
   // Fetch user data on component mount
   useEffect(() => {
