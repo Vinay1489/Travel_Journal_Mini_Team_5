@@ -32,6 +32,9 @@ app.use(
 
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Backward-compatible aliases: serve uploaded files also under legacy public paths
+app.use('/img/users', express.static(path.join(__dirname, 'uploads/users')));
+app.use('/img/journals', express.static(path.join(__dirname, 'uploads')));
 
 
 app.use(express.json({ limit: '50mb' }));
