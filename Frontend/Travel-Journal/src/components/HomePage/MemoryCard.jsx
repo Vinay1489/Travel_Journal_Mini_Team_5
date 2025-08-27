@@ -97,7 +97,14 @@ function MemoryCard({ title, id, date, location, description, mood, image, user 
         {user && (
           <div className="flex items-center gap-2 mt-4">
             <img
-              src={user.photo ? `${API_BASE_URL}/uploads/users/${user.photo}` : AVATAR_FALLBACK_URL}
+              src={(() => {
+                const p = user.photo;
+                if (!p) return AVATAR_FALLBACK_URL;
+                if (typeof p === 'string' && p.startsWith('http')) return p;
+                if (typeof p === 'string' && p.startsWith('/uploads/')) return `${API_BASE_URL}${p}`;
+                if (typeof p === 'string' && p.startsWith('/img/')) return `${API_BASE_URL}${p}`;
+                return `${API_BASE_URL}/uploads/users/${p}`;
+              })()}
               alt={user.name}
               className="w-8 h-8 rounded-full object-cover"
               onError={(e) => {

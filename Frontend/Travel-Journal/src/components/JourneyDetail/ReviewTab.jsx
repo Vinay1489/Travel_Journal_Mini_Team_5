@@ -139,11 +139,14 @@ function ReviewTab({ journalId }) {
             <div key={r._id} className="p-4 border rounded shadow-sm">
               <div className="flex items-center space-x-3 mb-2">
                 <img
-                  src={
-                    r.user.photo
-                      ? `${API_BASE_URL}/uploads/users/${r.user.photo}`
-                      : AVATAR_FALLBACK_URL
-                  }
+                  src={(() => {
+                    const p = r.user.photo;
+                    if (!p) return AVATAR_FALLBACK_URL;
+                    if (typeof p === 'string' && p.startsWith('http')) return p;
+                    if (typeof p === 'string' && p.startsWith('/uploads/')) return `${API_BASE_URL}${p}`;
+                    if (typeof p === 'string' && p.startsWith('/img/')) return `${API_BASE_URL}${p}`;
+                    return `${API_BASE_URL}/uploads/users/${p}`;
+                  })()}
                   alt={r.user.name}
                   className="w-8 h-8 rounded-full object-cover"
                   onError={(e) => {

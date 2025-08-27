@@ -34,13 +34,14 @@ function ProfileInfo() {
       <div className="relative">
         <div className="overflow-hidden w-24 h-24 rounded-full">
           <img
-            src={
-              user.data?.photo
-                ? user.data.photo.startsWith("http")
-                  ? user.data.photo
-                  : `${API_BASE_URL}/uploads/users/${user.data.photo}`
-                : defaultPic || AVATAR_FALLBACK_URL
-            }
+            src={(() => {
+              const p = user.data?.photo;
+              if (!p) return defaultPic || AVATAR_FALLBACK_URL;
+              if (p.startsWith("http")) return p;
+              if (p.startsWith("/uploads/")) return `${API_BASE_URL}${p}`;
+              if (p.startsWith("/img/")) return `${API_BASE_URL}${p}`;
+              return `${API_BASE_URL}/uploads/users/${p}`;
+            })()}
             alt="Profile"
             className="w-full h-full object-cover"
             onError={(e) => {

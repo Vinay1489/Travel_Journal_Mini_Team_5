@@ -70,13 +70,14 @@ function BottomNavigation() {
         <PopoverButton className="flex flex-col gap-1 items-center text-xs font-medium cursor-pointer w-[102px] outline-none focus:ring-0">
           <img
             // src="https://cdn.builder.io/api/v1/image/assets/TEMP/2fd4cfe83510062f071e2ca1e3bd937375124e93"
-            src={
-              user?.data?.photo
-                ? user.data.photo.startsWith("http")
-                  ? user.data.photo
-                  : `${API_BASE_URL}/uploads/users/${user.data.photo}`
-                : defaultPic || AVATAR_FALLBACK_URL
-            }
+            src={(() => {
+              const p = user?.data?.photo;
+              if (!p) return defaultPic || AVATAR_FALLBACK_URL;
+              if (p.startsWith("http")) return p;
+              if (p.startsWith("/uploads/")) return `${API_BASE_URL}${p}`;
+              if (p.startsWith("/img/")) return `${API_BASE_URL}${p}`;
+              return `${API_BASE_URL}/uploads/users/${p}`;
+            })()}
             
             alt="Profile"
             className="w-7 h-7 rounded-full border-2 border-gray-300"
