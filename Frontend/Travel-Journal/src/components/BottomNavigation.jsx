@@ -7,7 +7,7 @@ import { logout } from "../api/authService";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { toast } from "react-toastify";
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, AVATAR_FALLBACK_URL } from "../config";
 
 function BottomNavigation() {
   const {user,setIsLoggedIn,defaultPic}=useContext(UserContext);
@@ -74,8 +74,8 @@ function BottomNavigation() {
               user?.data?.photo
                 ? user.data.photo.startsWith("http")
                   ? user.data.photo
-                  : `${baseUrl}/img/users/${user.data.photo}`
-                : defaultPic
+                  : `${API_BASE_URL}/uploads/users/${user.data.photo}`
+                : defaultPic || AVATAR_FALLBACK_URL
             }
             
             alt="Profile"

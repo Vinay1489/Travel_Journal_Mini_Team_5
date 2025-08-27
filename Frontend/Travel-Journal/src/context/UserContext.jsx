@@ -1,7 +1,7 @@
 
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, AVATAR_FALLBACK_URL } from "../config";
 
 // Create the User Context
 export const UserContext = createContext();
@@ -10,13 +10,13 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const defaultPic=`${baseUrl}/img/users/default.jpg`;
+  const defaultPic = `${API_BASE_URL}/uploads/users/default.jpg` || AVATAR_FALLBACK_URL;
 
   // Fetch user data on component mount
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("https://travel-journal-w8vd.onrender.com/api/v1/users/me", {
+        const res = await axios.get(`${API_BASE_URL}/api/v1/users/me`, {
           withCredentials: true,
         });
         if (res.data.status === "Success") {
