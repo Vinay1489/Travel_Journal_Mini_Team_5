@@ -1,9 +1,7 @@
 import React from "react";
 import { CalendarIcon, LocationIcon } from "../Icons";
 import { Link } from "react-router-dom";
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
-
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, AVATAR_FALLBACK_URL, IMAGE_FALLBACK_URL } from "../../config";
 
 const moodEmojis = {
   happy: "😊",
@@ -66,7 +64,7 @@ function MemoryCard({ title, id, date, location, description, mood, image, user 
       <div className="relative h-[218px]">
         <Link to={`/journey-details/${id}`}>
           <img
-            src={image ? `${baseURL}${image}` : "/fallback.jpg"}
+            src={image ? `${API_BASE_URL}${image}` : IMAGE_FALLBACK_URL}
             alt={title}
             className="object-cover bg-neutral-200 size-full"
           />
@@ -99,7 +97,7 @@ function MemoryCard({ title, id, date, location, description, mood, image, user 
         {user && (
           <div className="flex items-center gap-2 mt-4">
             <img
-              src={user.photo ? `${baseURL}/img/users/${user.photo}` : "/user-fallback.jpg"}
+              src={user.photo ? `${API_BASE_URL}/uploads/users/${user.photo}` : AVATAR_FALLBACK_URL}
               alt={user.name}
               className="w-8 h-8 rounded-full object-cover"
             />

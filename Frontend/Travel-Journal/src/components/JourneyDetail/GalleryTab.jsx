@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getJournalMedia, uploadMedia, deleteMedia } from "../../api/media";
 import { Camera } from "lucide-react"; // camera icon
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, IMAGE_FALLBACK_URL } from "../../config";
 
 const GalleryTab = ({ journalId }) => {
   const [mediaList, setMediaList] = useState([]);
@@ -87,7 +87,7 @@ const GalleryTab = ({ journalId }) => {
             className="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition"
           >
             <img
-              src={`${baseUrl}${media.url}`}
+              src={`${API_BASE_URL}${media.url}`}
               alt="media"
               className="object-cover w-full aspect-[4/3] group-hover:scale-105 transition-transform duration-300"
             />

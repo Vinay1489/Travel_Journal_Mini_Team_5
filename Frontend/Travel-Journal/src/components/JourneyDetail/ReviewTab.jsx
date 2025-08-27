@@ -6,8 +6,7 @@ import {
   deleteReview,
 } from "../../api/reviews";
 import { UserContext } from "../../context/UserContext";
-
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, AVATAR_FALLBACK_URL } from "../../config";
 
 function ReviewTab({ journalId }) {
   const [reviews, setReviews] = useState([]);
@@ -142,8 +141,8 @@ function ReviewTab({ journalId }) {
                 <img
                   src={
                     r.user.photo
-                      ? `${baseURL}/img/users/${r.user.photo}`
-                      : "/user-fallback.jpg"
+                      ? `${API_BASE_URL}/uploads/users/${r.user.photo}`
+                      : AVATAR_FALLBACK_URL
                   }
                   alt={r.user.name}
                   className="w-8 h-8 rounded-full object-cover"

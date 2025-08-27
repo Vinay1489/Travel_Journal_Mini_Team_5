@@ -1,8 +1,7 @@
 import React from "react";
 import Tag from "./Tag";
 import JourneyActions from "./JourneyActions";
-
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, IMAGE_FALLBACK_URL } from "../../config";
 
 
 function JourneyContent({ journal }) {
@@ -24,7 +23,7 @@ function JourneyContent({ journal }) {
       <div className="relative mb-8">
         <img
           // src={journal.photos}
-          src={journal.photos ? `${baseURL}${journal.photos}` : "/fallback.jpg"}
+          src={journal.photos ? `${API_BASE_URL}${journal.photos}` : IMAGE_FALLBACK_URL}
           className="object-cover w-full rounded-2xl h-[504px]"
           alt={journal.title}
         />
